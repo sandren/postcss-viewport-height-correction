@@ -4,6 +4,7 @@ import cx from 'classnames';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenu2Open, setIsMenu2Open] = useState(false);
 
   function setViewportProperty(doc) {
     var prevClientHeight;
@@ -33,12 +34,18 @@ const Index = () => {
       </Helmet>
       <div className='flex flex-col justify-between min-h-screen p-8 bg-blue-100'>
         <div className='text-black text-center'>Welcome to 100vh world!</div>
-        <div className='flex justify-center'>
+        <div className='flex justify-center space-x-8'>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className='w-full max-w-md p-4 bg-blue-500 rounded font-bold text-white'
+            className='w-full max-w-xs p-4 bg-blue-500 rounded font-bold text-white'
           >
             Do the thing!
+          </button>
+          <button
+            onClick={() => setIsMenu2Open(!isMenu2Open)}
+            className='w-full max-w-xs p-4 bg-blue-500 rounded font-bold text-white'
+          >
+            Do the other thing!
           </button>
         </div>
       </div>
@@ -55,6 +62,8 @@ const Index = () => {
       >
         <div className='text-white text-center'>
           Does this menu overflow the screen?
+          <br />
+          It's using 100vh.
         </div>
         <div className='flex justify-center'>
           <button
@@ -65,6 +74,29 @@ const Index = () => {
           </button>
         </div>
         <div className='absolute left-0 bottom-0 text-xs text-pink-200 px-1'>
+          Can you see me?
+        </div>
+      </div>
+      <div
+        className={cx(
+          isMenu2Open ? 'translate-x-0' : 'translate-x-full',
+          'fixed right-0 top-0 bottom-0 z-50 flex flex-col justify-between w-4/5 lg:w-1/2 p-8 bg-red-700 transform transition duration-500 ease-in-out',
+        )}
+      >
+        <div className='text-white text-center'>
+          Does this menu overflow the screen?
+          <br />
+          It's using `top: 0` and `bottom: 0` to span the full height.
+        </div>
+        <div className='flex justify-center'>
+          <button
+            onClick={() => setIsMenu2Open(!isMenu2Open)}
+            className='w-full max-w-md mt-8 p-4 bg-red-500 rounded font-bold text-white'
+          >
+            Undo the other thing...
+          </button>
+        </div>
+        <div className='absolute left-0 bottom-0 text-xs text-red-200 px-1'>
           Can you see me?
         </div>
       </div>
